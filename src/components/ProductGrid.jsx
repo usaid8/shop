@@ -308,14 +308,14 @@ export default function ProductGrid({ products, showFilters = true, title, subti
             <AnimatePresence mode="popLayout">
               {filtered.map((product, i) => (
                 <motion.div
-                  key={product.id}
+                  key={product._id || product.id || `product-${i}`}
                   layout
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, delay: (i % 8) * 0.04 }}
                 >
-                  <ProductCard product={product} listView={gridCols === 'list'} />
+                  <ProductCard product={{ ...product, id: product._id || product.id }} listView={gridCols === 'list'} />
                 </motion.div>
               ))}
             </AnimatePresence>

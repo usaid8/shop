@@ -200,28 +200,28 @@ export default function ProductCard({ product, listView = false }) {
       </Link>
 
       {/* Info */}
-      <div className="p-3.5 pt-3" style={{ background: 'linear-gradient(to bottom, var(--color-secondary), var(--color-tertiary))' }}>
-        <p className="text-[10px] text-accent font-semibold uppercase tracking-wider mb-1.5">{product.category}</p>
+      <div className="p-2.5 xs:p-3.5 pt-2.5 xs:pt-3" style={{ background: 'linear-gradient(to bottom, var(--color-secondary), var(--color-tertiary))' }}>
+        <p className="text-[8px] xs:text-[10px] text-accent font-semibold uppercase tracking-wider mb-1 xs:mb-1.5">{product.category}</p>
         <Link to={`/product/${product.id}`}>
-          <h3 className="font-medium text-sm line-clamp-1 text-foreground/90 underline-hover">{product.name}</h3>
+          <h3 className="font-medium text-xs xs:text-sm line-clamp-1 text-foreground/90 underline-hover">{product.name}</h3>
         </Link>
-        <div className="flex items-center gap-1 mt-2 mb-2.5">
+        <div className="flex items-center gap-0.5 xs:gap-1 mt-1.5 xs:mt-2 mb-2 xs:mb-2.5">
           {[...Array(5)].map((_, i) => (
-            <span key={i} className={`text-[10px] ${i < Math.floor(product.rating) ? 'text-accent' : ''}`} style={{ color: i < Math.floor(product.rating) ? undefined : 'var(--star-empty)' }}>★</span>
+            <span key={i} className={`text-[8px] xs:text-[10px] ${i < Math.floor(product.rating) ? 'text-accent' : ''}`} style={{ color: i < Math.floor(product.rating) ? undefined : 'var(--star-empty)' }}>★</span>
           ))}
-          <span className="text-[10px] text-muted ml-1">({product.reviews})</span>
+          <span className="text-[8px] xs:text-[10px] text-muted ml-0.5 xs:ml-1">({product.reviews})</span>
         </div>
-        <div className="flex items-baseline gap-2">
-          <span className="text-sm font-bold text-accent">Rs {product.price.toLocaleString()}</span>
+        <div className="flex items-baseline gap-1.5 xs:gap-2 flex-wrap">
+          <span className="text-xs xs:text-sm font-bold text-accent">Rs {product.price.toLocaleString()}</span>
           {product.originalPrice && (
-            <span className="text-xs text-muted line-through">Rs {product.originalPrice.toLocaleString()}</span>
+            <span className="text-[10px] xs:text-xs text-muted line-through">Rs {product.originalPrice.toLocaleString()}</span>
           )}
         </div>
         {/* Mobile quick add button */}
         {product.inStock && (
           <button
             onClick={(e) => { e.preventDefault(); setShowQuick(true) }}
-            className="mt-2 w-full py-2 bg-accent text-white text-xs font-semibold tracking-wider uppercase rounded-lg sm:hidden"
+            className="mt-2 w-full py-1.5 xs:py-2 bg-accent text-white text-[10px] xs:text-xs font-semibold tracking-wider uppercase rounded-lg sm:hidden"
           >
             Quick Add
           </button>
@@ -260,14 +260,14 @@ export default function ProductCard({ product, listView = false }) {
             </div>
 
             {/* Size */}
-            <div className="px-4 pt-3 pb-2">
-              <p className="text-xs sm:text-[10px] font-bold uppercase tracking-widest mb-3 text-muted">Select Size</p>
-              <div className="flex flex-wrap gap-2 sm:gap-1.5 mb-2">
+            <div className="px-3 xs:px-4 pt-3 pb-2">
+              <p className="text-[10px] xs:text-xs sm:text-[10px] font-bold uppercase tracking-widest mb-2 xs:mb-3 text-muted">Select Size</p>
+              <div className="flex flex-wrap gap-1.5 xs:gap-2 sm:gap-1.5 mb-2">
                 {product.sizes.map(s => (
                   <button
                     key={s}
                     onClick={() => setSelectedSize(s)}
-                    className={`min-w-[48px] sm:min-w-[36px] px-3 sm:px-2.5 py-2 sm:py-1.5 text-base sm:text-xs font-semibold transition-all duration-150 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/60 ${
+                    className={`min-w-[36px] xs:min-w-[48px] sm:min-w-[36px] px-2 xs:px-3 sm:px-2.5 py-1.5 xs:py-2 sm:py-1.5 text-xs xs:text-base sm:text-xs font-semibold transition-all duration-150 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/60 ${
                       selectedSize === s
                         ? 'border-accent bg-accent text-white shadow-[0_0_12px_rgba(200,16,46,0.35)]'
                         : 'text-muted hover:text-foreground'
@@ -284,14 +284,14 @@ export default function ProductCard({ product, listView = false }) {
             </div>
 
             {/* Color */}
-            <div className="px-4 pt-2 pb-3">
-              <p className="text-xs sm:text-[10px] font-bold uppercase tracking-widest mb-3 text-muted">Select Color</p>
-              <div className="flex flex-wrap gap-2 sm:gap-1.5 mb-2">
+            <div className="px-3 xs:px-4 pt-2 pb-3">
+              <p className="text-[10px] xs:text-xs sm:text-[10px] font-bold uppercase tracking-widest mb-2 xs:mb-3 text-muted">Select Color</p>
+              <div className="flex flex-wrap gap-1.5 xs:gap-2 sm:gap-1.5 mb-2">
                 {product.colors.map(c => (
                   <button
                     key={c}
                     onClick={() => setSelectedColor(c)}
-                    className={`min-w-[48px] sm:min-w-[36px] px-3 sm:px-2.5 py-2 sm:py-1.5 text-base sm:text-xs font-semibold transition-all duration-150 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/60 ${
+                    className={`min-w-[36px] xs:min-w-[48px] sm:min-w-[36px] px-2 xs:px-3 sm:px-2.5 py-1.5 xs:py-2 sm:py-1.5 text-xs xs:text-base sm:text-xs font-semibold transition-all duration-150 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/60 ${
                       selectedColor === c
                         ? 'border-accent bg-accent text-white shadow-[0_0_12px_rgba(200,16,46,0.35)]'
                         : 'text-muted hover:text-foreground'
