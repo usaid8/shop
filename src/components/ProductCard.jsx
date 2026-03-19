@@ -236,8 +236,8 @@ export default function ProductCard({ product, listView = false }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-50 flex flex-col rounded-none sm:rounded-xl overflow-y-auto"
-            style={{ background: 'var(--surface-card)', WebkitOverflowScrolling: 'touch' }}
+            className="fixed inset-0 z-50 flex flex-col overflow-hidden"
+            style={{ background: 'var(--surface-card)', borderRadius: 0 }}
           >
             {/* Top strip — product name + close */}
             <div className="flex items-center justify-between px-3 sm:px-4 pt-3 sm:pt-4 pb-2 sm:pb-3" style={{ borderBottom: '1px solid var(--border-default)' }}>
