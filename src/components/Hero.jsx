@@ -78,9 +78,9 @@ export default function Hero({ onShopClick }) {
           style={{ transformOrigin: 'top', background: 'linear-gradient(to bottom, transparent, var(--border-default), transparent)' }}
           className="absolute right-[8%] sm:right-[12%] top-0 bottom-0 w-px"
         />
-        {/* Bottom vignette — fades into the section below */}
-        <div className="hero-vignette absolute bottom-0 left-0 right-0 h-40"
-          style={{ background: 'linear-gradient(to top, var(--color-primary) 0%, transparent 100%)' }} />
+        {/* Bottom vignette — fades into the section below with smoother blend */}
+        <div className="hero-vignette absolute bottom-0 left-0 right-0 h-64"
+          style={{ background: 'linear-gradient(to top, var(--color-primary) 0%, var(--color-primary) 20%, transparent 100%)' }} />
       </div>
 
       {/* Content */}
