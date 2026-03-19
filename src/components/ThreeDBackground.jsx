@@ -138,15 +138,15 @@ export default function ThreeDBackground() {
               <Stars radius={100} depth={50} count={500} factor={4} fade speed={0.1} />
             )}
           </Canvas>
-          {/* Bottom gradient fade to blend with content below */}
+          {/* Bottom gradient fade to blend with content below - extended and multi-stop */}
           <div 
             style={{
               position: 'absolute',
               bottom: 0,
               left: 0,
               right: 0,
-              height: '30vh',
-              background: 'linear-gradient(to top, var(--color-primary) 0%, transparent 100%)',
+              height: '50vh',
+              background: 'linear-gradient(to top, var(--color-primary) 0%, var(--color-primary) 15%, rgba(var(--tw-color-primary), 0.8) 40%, rgba(var(--tw-color-primary), 0.4) 70%, transparent 100%)',
               pointerEvents: 'none',
             }}
           />

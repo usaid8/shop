@@ -236,19 +236,24 @@ export default function ProductCard({ product, listView = false }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-50 flex flex-col overflow-hidden"
-            style={{ background: 'var(--surface-card)', borderRadius: 0 }}
+            className="fixed inset-0 z-50 flex flex-col overflow-y-auto"
+            style={{ 
+              background: 'var(--color-primary)', 
+              borderRadius: '0px',
+              WebkitBorderRadius: '0px',
+              MozBorderRadius: '0px',
+            }}
           >
             {/* Top strip — product name + close */}
-            <div className="flex items-center justify-between px-3 sm:px-4 pt-3 sm:pt-4 pb-2 sm:pb-3" style={{ borderBottom: '1px solid var(--border-default)' }}>
+            <div className="flex items-center justify-between px-3 sm:px-4 pt-3 sm:pt-4 pb-2 sm:pb-3 flex-shrink-0" style={{ borderBottom: '1px solid var(--border-default)' }}>
               <div className="min-w-0 pr-2">
                 <p className="text-[10px] sm:text-xs text-accent font-semibold uppercase tracking-wider mb-0.5">{product.category}</p>
                 <p className="text-xs sm:text-sm font-bold text-foreground line-clamp-1">{product.name}</p>
               </div>
               <button
                 onClick={() => setShowQuick(false)}
-                className="w-8 h-8 sm:w-7 sm:h-7 flex items-center justify-center rounded-full sm:rounded-lg text-muted hover:text-foreground transition-colors flex-shrink-0"
-                style={{ background: 'var(--surface-quick-add-close)', zIndex: 60 }}
+                className="w-8 h-8 sm:w-7 sm:h-7 flex items-center justify-center text-muted hover:text-foreground transition-colors flex-shrink-0"
+                style={{ background: 'var(--surface-quick-add-close)', borderRadius: '0px' }}
                 onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-quick-add-close-h)'}
                 onMouseLeave={e => e.currentTarget.style.background = 'var(--surface-quick-add-close)'}
                 aria-label="Close quick add"
@@ -259,56 +264,61 @@ export default function ProductCard({ product, listView = false }) {
               </button>
             </div>
 
-            {/* Size */}
-            <div className="px-3 sm:px-4 pt-3 pb-2">
-              <p className="text-[10px] font-bold uppercase tracking-widest mb-2 text-muted">Select Size</p>
-              <div className="flex flex-wrap gap-1.5 mb-2">
-                {product.sizes.map(s => (
-                  <button
-                    key={s}
-                    onClick={() => setSelectedSize(s)}
-                    className={`min-w-[32px] sm:min-w-[36px] px-2 sm:px-2.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-semibold transition-all duration-150 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/60 ${
-                      selectedSize === s
-                        ? 'border-accent bg-accent text-white shadow-[0_0_12px_rgba(200,16,46,0.35)]'
-                        : 'text-muted hover:text-foreground'
-                    }`}
-                    style={{
-                      marginBottom: 4,
-                      ...(selectedSize !== s ? { borderColor: 'var(--border-default)', background: 'var(--inset-highlight)' } : {}),
-                    }}
-                  >
-                    {s}
-                  </button>
-                ))}
+            {/* Scrollable content area */}
+            <div className="flex-1 overflow-y-auto">
+              {/* Size */}
+              <div className="px-3 sm:px-4 pt-3 pb-2">
+                <p className="text-[10px] font-bold uppercase tracking-widest mb-2 text-muted">Select Size</p>
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  {product.sizes.map(s => (
+                    <button
+                      key={s}
+                      onClick={() => setSelectedSize(s)}
+                      className={`min-w-[32px] sm:min-w-[36px] px-2 sm:px-2.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-semibold transition-all duration-150 border focus:outline-none focus:ring-2 focus:ring-accent/60 ${
+                        selectedSize === s
+                          ? 'border-accent bg-accent text-white shadow-[0_0_12px_rgba(200,16,46,0.35)]'
+                          : 'text-muted hover:text-foreground'
+                      }`}
+                      style={{
+                        marginBottom: 4,
+                        borderRadius: '4px',
+                        ...(selectedSize !== s ? { borderColor: 'var(--border-default)', background: 'var(--inset-highlight)' } : {}),
+                      }}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Color */}
+              <div className="px-3 sm:px-4 pt-2 pb-3">
+                <p className="text-[10px] font-bold uppercase tracking-widest mb-2 text-muted">Select Color</p>
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  {product.colors.map(c => (
+                    <button
+                      key={c}
+                      onClick={() => setSelectedColor(c)}
+                      className={`min-w-[32px] sm:min-w-[36px] px-2 sm:px-2.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-semibold transition-all duration-150 border focus:outline-none focus:ring-2 focus:ring-accent/60 ${
+                        selectedColor === c
+                          ? 'border-accent bg-accent text-white shadow-[0_0_12px_rgba(200,16,46,0.35)]'
+                          : 'text-muted hover:text-foreground'
+                      }`}
+                      style={{
+                        marginBottom: 4,
+                        borderRadius: '4px',
+                        ...(selectedColor !== c ? { borderColor: 'var(--border-default)', background: 'var(--inset-highlight)' } : {}),
+                      }}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Color */}
-            <div className="px-3 sm:px-4 pt-2 pb-3">
-              <p className="text-[10px] font-bold uppercase tracking-widest mb-2 text-muted">Select Color</p>
-              <div className="flex flex-wrap gap-1.5 mb-2">
-                {product.colors.map(c => (
-                  <button
-                    key={c}
-                    onClick={() => setSelectedColor(c)}
-                    className={`min-w-[32px] sm:min-w-[36px] px-2 sm:px-2.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-semibold transition-all duration-150 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/60 ${
-                      selectedColor === c
-                        ? 'border-accent bg-accent text-white shadow-[0_0_12px_rgba(200,16,46,0.35)]'
-                        : 'text-muted hover:text-foreground'
-                    }`}
-                    style={{
-                      marginBottom: 4,
-                      ...(selectedColor !== c ? { borderColor: 'var(--border-default)', background: 'var(--inset-highlight)' } : {}),
-                    }}
-                  >
-                    {c}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Price + Add button */}
-            <div className="mt-auto px-3 sm:px-4 pb-3 sm:pb-4 pt-2" style={{ borderTop: '1px solid var(--border-default)' }}>
+            {/* Price + Add button - fixed at bottom */}
+            <div className="flex-shrink-0 px-3 sm:px-4 pb-3 sm:pb-4 pt-2" style={{ borderTop: '1px solid var(--border-default)' }}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
                 <div className="flex items-baseline gap-1.5">
                   <span className="text-base sm:text-base font-bold text-accent">Rs {product.price.toLocaleString()}</span>
@@ -327,11 +337,12 @@ export default function ProductCard({ product, listView = false }) {
               <motion.button
                 onClick={handleAdd}
                 whileTap={{ scale: 0.97 }}
-                className={`w-full py-2.5 sm:py-3 text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 rounded-xl ${
+                className={`w-full py-2.5 sm:py-3 text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 ${
                   added
                     ? 'bg-green-500/20 border border-green-500/30 text-green-400'
                     : 'bg-accent hover:bg-accent/90 text-white accent-glow'
                 }`}
+                style={{ borderRadius: '4px' }}
               >
                 {added ? '✓  Added to Cart' : 'Add to Cart'}
               </motion.button>
